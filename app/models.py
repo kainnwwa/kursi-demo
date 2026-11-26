@@ -7,7 +7,10 @@ class UserWithPhone(AbstractUser):
     phone = models.CharField(
         "Номер телефона",
         max_length=17,
-        validators=[RegexValidator(r"^\+?9\d{2}\s\d{3}\-\d{2}\-\d{2}$")]
+        validators=[
+        RegexValidator (r'^\+?8?\(?9\d{2}\)?\s?\d{3}-?\d{2}-?\d{2}$',
+                message="Формат: +7(999) 123-45-67 или 89991234567")
+        ]
     )
 
 User = get_user_model()
@@ -28,5 +31,3 @@ class Application(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.service.name}"
-    
-    
