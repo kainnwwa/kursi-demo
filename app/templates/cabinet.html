@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Личный кабинет{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4 mt-3">
+    <h2>Личный кабинет</h2>
+    <h4 class="text-muted">Привет, {{ user.username }}!</h4>
+</div>
+
+<div class="card">
+    <div class="card-header">Мои активные заявки на курсы</div>
+    <div class="card-body">
+        <ul class="list-group mb-3">
+            {% for app in user.application_set.all %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <strong>{{ app.service.name }}</strong> 
+                        <span class="text-muted small">(Заявка от {{ app.created_at|date:"d.m.Y" }})</span>
+                    </div>
+                    <span class="badge bg-success rounded-pill">Активна</span>
+                </li>
+            {% empty %}
+                <li class="list-group-item text-center text-muted">У вас пока нет заявок.</li>
+            {% endfor %}
+        </ul>
+        
+        <a href="{% url 'application_create' %}" class="btn btn-primary w-100">Создать новую заявку</a>
+    </div>
+</div>
+{% endblock %}

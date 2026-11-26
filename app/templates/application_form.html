@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Запись на курс{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card mt-5">
+            <div class="card-header">Запись на курс</div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-success w-100">Отправить заявку</button>
+                    <a href="{% url 'cabinet' %}" class="btn btn-link w-100 mt-2">Отмена</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
